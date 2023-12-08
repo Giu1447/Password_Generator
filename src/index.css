@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 {
+  margin-bottom: 3vh;
+  color: white;
+  font-size: 3rem;
+}
+
+body {
+  background-color: black;
+}
+
+.App {
+  color: white;
+}
+
+label {
+  margin-right: 1vh;
+  font-weight: bold;
+}
+
+.password {
+  margin-top: 2vh;
+}
+
+Row {
+  margin-bottom: 2vh;
+}
