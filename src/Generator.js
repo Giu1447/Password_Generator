@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Row, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Col, Row, InputGroup, FormControl, Button, Alert } from 'react-bootstrap';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 function Generator() {
@@ -9,6 +9,7 @@ function Generator() {
     const [numbers, setNumbers] = useState(true);
     const [symbols, setSymbols] = useState(true);
     const [length, setLength] = useState(8);
+    const [copied, setCopied] = useState(false);
 
     const generatePassword = () => {
         let characterList = '';
@@ -36,6 +37,11 @@ function Generator() {
         }
 
         setPassword(generatedPassword);
+    };
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(password);
+        setCopied(true);
     };
 
     return (
@@ -119,16 +125,20 @@ function Generator() {
                     </Col>
                 </Row>
                 <div className="password">
-                    {password && (
-                        <Row>
-                            <Col>
-                                <InputGroup>
-                                    <FormControl type="text" value={password} readOnly />
-                                    <Button onClick={() => navigator.clipboard.writeText(password)}>Copy</Button>
-                                </InputGroup>
-                            </Col>
-                        </Row>
+                    {password && copied && (
+                        <Alert variant="dark" onClose={() => setCopied(false)} dismissible>
+                            Password copied
+                        </Alert>
                     )}
+                    <Row>
+                        <Col>
+                            <InputGroup>
+                                <FormControl type="text" value={password} readOnly/>
+                                <Button onClick={handleCopy}>Copy</Button>
+                            </InputGroup>
+                        </Col>
+                    </Row>
+
                 </div>
             </div>
         </div>
